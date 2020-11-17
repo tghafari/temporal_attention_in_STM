@@ -25,7 +25,7 @@ os.getcwd()
 os.listdir()
 
 # df1 = pd.read_csv('Dropbox\Tara\Data\PooledData4DiffLev data\PooledData4DiffLev.csv')
-df1 = pd.read_csv('Data\PooledData4DiffLev data\PooledData4DiffLev.csv')
+df1 = pd.read_csv('Data//PooledData4DiffLev.csv') 
 df1.head()
 
 data = df1[['score','predictability', 'difficulty','foreperiod','TP', 'TN', 'FP', 'FN']]
