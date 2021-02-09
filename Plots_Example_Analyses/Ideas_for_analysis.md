@@ -2,6 +2,10 @@ Suggested analyses:
 
 use tachymetric functions (performance vs. reaction time)
 
+Could use memory capacity formulas:
+1) Cowan's formula (Cowan, 2001) -> K = SS * (H + C – 1), where SS represents set size, H represents hit rate, and C represents correct rejection rate.
+2) Pashler’s formula (Pashler,1988) -> K <sub>p</sub> = SS * ((H + FA)/(1 – FA)), where SS represents set size, H represents hit rate, and FA represents the false alarm rate.
+
 Weibull functions were fit to each observer’s data using maximum likelihood estimation to derive the 75%-correct contrast threshold for the orientation discrimination task, for each location and stimulus condition (Prins & Kingdom, 2018):
 
  ψ = γ + (1 − γ − λ) (1 − e <sup>-(x/α)<sup>β</sup></sup>)
