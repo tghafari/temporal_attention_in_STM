@@ -4,7 +4,7 @@ clc;
 
 %% Overall analyses
 cd('/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/DMSQuadrants/')
-load AllData.mat
+load AllDataQuadrants.mat
 nSubj=numel(AllData);
 MeanRTCorrect=nan(2,4,nSubj);
 MeanScore=nan(2,4,nSubj);
@@ -45,7 +45,7 @@ for i=1:nSubj
 end
 
 MeanScoreMean=mean(MeanScore,3);
-InverseEfficiencyMean=mean(InverseEfficiencyScore,3);
+IESMean=mean(InverseEfficiencyScore,3);
 CVScoreMean=mean(CVScore,3);
 STDScoreMean=mean(STDScore,3);
 
@@ -138,14 +138,14 @@ ylim([.3 1])
 grid on
 %% calculate performance for each subject in each diff level in each quadrant
 clear;
-cd('/Users/Tara/Documents/MATLAB/MATLAB Programs/PhD Thesis Programs/DMS Project/Results/Analyse/DMSQuadrants')
-load AllData.mat
+cd('/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/DMSQuadrants')
+load AllDataQuadrants.mat
 nSubj=numel(AllData);
-% MeanScore=nan(2,4,4,nSubj); %with foreperiod
-MeanScore=nan(2,4,2,nSubj); %without foreperiod OR two positions
+MeanScore=nan(2,4,4,nSubj); %with foreperiod
+% MeanScore=nan(2,4,2,nSubj); %without foreperiod OR two positions
 % NrmlzMeanScore=nan(1,4,4,nSubj); % performance in 8 normalized by 4
-% STDScore=nan(2,4,4,nSubj); %with foreperiod
-STDScore=nan(2,4,2,nSubj); %without foreperiod OR two positions
+STDScore=nan(2,4,4,nSubj); %with foreperiod
+% STDScore=nan(2,4,2,nSubj); %without foreperiod OR two positions
 MeanRTCorrect=nan(2,4,4,nSubj);
 IEScore=nan(2,4,4,nSubj);
 pg=zeros(1,nSubj); %vector of subject's performance group
@@ -161,9 +161,9 @@ for i=1:nSubj
     Data(abs(Data.xpos)<0.0001,:)=[];
     Data.Right=Data.xpos>0;
     
-    %     MM = grpstats(Data, {'Top','Right','foreperiod','predictability','difficulty'}, {@nanmean,'std'}); %all conditions separated
-    MM = grpstats(Data, {'Top','foreperiod','predictability','difficulty'}, {@nanmean,'std'}); %only two positions
-    %     MM=grpstats(Data,{'Top','Right','predictability','difficulty'},{@nanmean,'std'}); %pool foreperiods
+        MM = grpstats(Data, {'Top','Right','foreperiod','predictability','difficulty'}, {@nanmean,'std'}); %all conditions separated
+    %     MM = grpstats(Data, {'Top','foreperiod','predictability','difficulty'}, {@nanmean,'std'}); %only two positions
+    %     MM = grpstats(Data, {'Top','Right','predictability','difficulty'},{@nanmean,'std'}); %pool foreperiods
     %     MeanScore(:,:,:,i)=reshape(MM.nanmean_score,2,4,[]); %with foreperiod
     %     NrmlzMeanScore(:,:,:,i)=MeanScore(2,:,:,i)./MeanScore(1,:,:,i);
     MeanScore(:,:,:,i)=reshape(MM.nanmean_score,2,4,[]); %without foreperiod OR two positions
@@ -231,8 +231,8 @@ end
 %% errorbars in all quadrants-foreperiod and predictability variable
 %     figure();
 
-for Dif=1:2
-%     for prf=1:2
+for Dif=1
+    for prf=1:2
 % for pred=1:2
     figure();
     
@@ -241,10 +241,10 @@ for Dif=1:2
     %     errorbar([1 2 3 4],squeeze(mean(mean(MeanScore(Dif,:,:,:),4))),squeeze(mean(std(MeanScore(Dif,:,:,:),[],4))./sqrt(nSubj)),'LineWidth',3) %Averaging all conditions only to show differences in visual quadrants
     %     errorbar([1 2],squeeze(median(MeanScore(Dif,1,[1,2],:),4)),squeeze(std(MeanScore(Dif,1,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr-in two positions
     %     errorbar([1 2],squeeze(median(MeanScore(Dif,2,[1,2],:),4)),squeeze(std(MeanScore(Dif,2,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr-in two positions
-    errorbar([1 2],squeeze(median(MeanScore(Dif,1,[1,2],:),4)),squeeze(std(MeanScore(Dif,1,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
-    errorbar([1 2],squeeze(median(MeanScore(Dif,2,[1,2],:),4)),squeeze(std(MeanScore(Dif,2,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
-    %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,1,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,1,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
-    %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,2,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,2,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
+    %     errorbar([1 2],squeeze(median(MeanScore(Dif,1,[1,2],:),4)),squeeze(std(MeanScore(Dif,1,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
+    %     errorbar([1 2],squeeze(median(MeanScore(Dif,2,[1,2],:),4)),squeeze(std(MeanScore(Dif,2,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
+        errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,1,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,1,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
+        errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,2,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,2,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
     %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,1,:,:),4)),squeeze(std(MeanScore(Dif,1,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
     %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,2,:,:),4)),squeeze(std(MeanScore(Dif,2,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
     %     errorbar([1 2 3 4],squeeze(nanmean(InverseEfficiencyScore(Dif,1,:,:),4)),squeeze(nanstd(InverseEfficiencyScore(Dif,1,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
@@ -256,40 +256,40 @@ for Dif=1:2
     %     ylabel('IE');
 %     ylabel('TPR difficult/easy');
     ylim([.2 1.1]);
-%     set(gca,'XTick',[1 2 3 4],'XTickLabel',posGroups,'XTickLabelRotation',45);
-        set(gca,'XTick',[1 2],'XTickLabel',{'Bottom','Top'},'XTickLabelRotation',45);
+    set(gca,'XTick',[1 2 3 4],'XTickLabel',posGroups,'XTickLabelRotation',45);
+    %         set(gca,'XTick',[1 2],'XTickLabel',{'Bottom','Top'},'XTickLabelRotation',45);
     legend(GroupNames([1,2]))
     %     legend('Predictable','Unpredictable')
-        title(['Difficulty Level : ',num2str(DiffLvl(Dif))])
-    %     ' perf grp: ' num2str(prf)])
+        title(['Difficulty Level : ',num2str(DiffLvl(Dif))...
+        ' perf grp: ' num2str(prf)])
 % title('Normalized data- Short foreperiod');
 
     subplot(1,2,2)
     hold on
     %     errorbar([1 2],squeeze(median(MeanScore(Dif,1,[3,4],:),4)),squeeze(std(MeanScore(Dif,1,[3,4],:),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr-in two positions
     %     errorbar([1 2],squeeze(median(MeanScore(Dif,2,[3,4],:),4)),squeeze(std(MeanScore(Dif,2,[3,4],:),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr-in two positions
-    errorbar([1 2],squeeze(median(MeanScore(Dif,3,[1,2],:),4)),squeeze(std(MeanScore(Dif,3,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
-    errorbar([1 2],squeeze(median(MeanScore(Dif,4,[1,2],:),4)),squeeze(std(MeanScore(Dif,4,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
-    %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,3,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,3,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
-    %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,4,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,4,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
+    %     errorbar([1 2],squeeze(median(MeanScore(Dif,3,[1,2],:),4)),squeeze(std(MeanScore(Dif,3,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
+    %     errorbar([1 2],squeeze(median(MeanScore(Dif,4,[1,2],:),4)),squeeze(std(MeanScore(Dif,4,[1,2],:),[],4)./sqrt(nSubj)),'LineWidth',3) %only two positions
+        errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,3,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,3,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
+        errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,4,:,(pg==prf)),4)),squeeze(std(MeanScore(Dif,4,:,(pg==prf)),[],4)./sqrt(nSubj)),'LineWidth',3) %adding perfGr
     %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,3,:,:),4)),squeeze(std(MeanScore(Dif,3,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
     %     errorbar([1 2 3 4],squeeze(median(MeanScore(Dif,4,:,:),4)),squeeze(std(MeanScore(Dif,4,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
     %     errorbar([1 2 3 4],squeeze(nanmean(InverseEfficiencyScore(Dif,3,:,:),4)),squeeze(nanstd(InverseEfficiencyScore(Dif,3,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
     %     errorbar([1 2 3 4],squeeze(nanmean(InverseEfficiencyScore(Dif,4,:,:),4)),squeeze(nanstd(InverseEfficiencyScore(Dif,4,:,:),[],4)./sqrt(nSubj)),'LineWidth',3)
-%     errorbar([1 2 3 4],squeeze(median(NrmlzMeanScore(:,pred+2,:,:),4)),squeeze(std(NrmlzMeanScore(:,pred+2,:,:),[],4)./sqrt(nSubj)),'LineWidth',3) %normalized scores
+    %     errorbar([1 2 3 4],squeeze(median(NrmlzMeanScore(:,pred+2,:,:),4)),squeeze(std(NrmlzMeanScore(:,pred+2,:,:),[],4)./sqrt(nSubj)),'LineWidth',3) %normalized scores
     grid on
         ylabel('TPR');
     %     ylabel('IE');
-%     ylabel('TPR difficult/easy');
+    %     ylabel('TPR difficult/easy');
     ylim([.2 1.1]);
-%     set(gca,'XTick',[1 2 3 4],'XTickLabel',posGroups,'XTickLabelRotation',45);
-        set(gca,'XTick',[1 2],'XTickLabel',{'Bottom','Top'},'XTickLabelRotation',45); %for two positions
+    set(gca,'XTick',[1 2 3 4],'XTickLabel',posGroups,'XTickLabelRotation',45);
+    %         set(gca,'XTick',[1 2],'XTickLabel',{'Bottom','Top'},'XTickLabelRotation',45); %for two positions
     legend(GroupNames([3,4]))
-        title(['Difficulty Level : ',num2str(DiffLvl(Dif))])
-    %     ' perf grp: ' num2str(prf)])
-% title('Normalized data- Long foreperiod');
-% end
-%     end
+        title(['Difficulty Level : ',num2str(DiffLvl(Dif))...
+        ' perf grp: ' num2str(prf)])
+    % title('Normalized data- Long foreperiod');
+    % end
+    end
 end
 
 %% Dot plot --  conditions separate, difficulties separate
@@ -431,9 +431,10 @@ for dif=1:length(DiffLvl)
     ylabel('% Correct');
     grid on
     title(['Difficulty = ', num2str(dif)])
-    if dif==length(DiffLvl); legend(GroupNames{1:2}); end;
+    if dif==length(DiffLvl); legend(GroupNames{1:2}); end
     % {'Predictable','Unpredictable'}
 end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% POOLED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% position -- all trials pooled
 clc;clear;
