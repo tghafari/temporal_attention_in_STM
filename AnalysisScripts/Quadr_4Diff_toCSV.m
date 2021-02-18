@@ -16,7 +16,7 @@ for diff = 1:length(DiffLvl)
     Data(Data.correct_response ==2,:)=[];
     Data(Data.difficulty ~= DiffLvl(diff),:)=[];
     
-    MM = grpstats(Data, {'foreperiod','predictability','xpos','ypos'}, {@nanmean,'std'}); %all conditions separated
+    MM = grpstats(Data, {'foreperiod','predictability','question'}, {@nanmean,'std'}); %all conditions separated
     MeanScore=reshape(MM.nanmean_score,DiffLvl(diff),[]);
     MeanRTCorrect=reshape(MM.nanmean_RTCorrect,DiffLvl(diff),[]);
     IES=MeanRTCorrect./MeanScore;
@@ -42,15 +42,14 @@ for diff = 1:length(DiffLvl)
     
     GroupNames = {'Predictable-Short', 'Unpredictable-Short','Predictable-Long', 'Unpredictable-Long'};
     %pos = {'pos_1','pos_2','pos_3','pos_4','pos_5','pos_6','pos_7','pos_8','pos_9','pos_10'}; % Row names
-    cols = {'sub_1','sub_2','sub_3','sub_4','sub_5','sub_6','sub_7','sub_8','sub_9','sub_10','sub_11',...
-        'sub_12','sub_13','sub_14','sub_15','sub_16','sub_17','sub_18'};
+    cols = {'sub_1','sub_2','sub_3','sub_4','sub_5','sub_6','sub_7','sub_8','sub_9','sub_10','sub_11'};
     
     for i=1:nSubj
         Data=AllData{i};
         Data(Data.correct_response ==2,:)=[];
         Data(Data.difficulty ~= DiffLvl(diff),:)=[];
         
-        MM = grpstats(Data, {'foreperiod','predictability','xpos','ypos'}, {@nanmean,'std'}); %all conditions separated
+        MM = grpstats(Data, {'foreperiod','predictability','question'}, {@nanmean,'std'}); %all conditions separated
         MeanScore(:,i,:)=reshape(MM.nanmean_score,DiffLvl(diff),[]);
         MeanRTCorrect(:,i,:)=reshape(MM.nanmean_RTCorrect,DiffLvl(diff),[]);
         IES(:,i,:)=MeanRTCorrect(:,i,:)./MeanScore(:,i,:);
