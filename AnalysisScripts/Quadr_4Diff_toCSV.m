@@ -1,6 +1,6 @@
 %% calculate performance for each subject in each diff level in each position - 4Diff
 cd('/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/DMS4DiffLevel')
-save_folder='/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/Sheets';
+save_folder='/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse';
 load PooledData4Diff.mat   % 1_ filename
 
 cd(save_folder)
@@ -19,7 +19,8 @@ for diff = 1:length(DiffLvl)
     MM = grpstats(Data, {'foreperiod','predictability','question'}, {@nanmean,'std'}); %all conditions separated
     MeanScore=reshape(MM.nanmean_score,DiffLvl(diff),[]);
     MeanRTCorrect=reshape(MM.nanmean_RTCorrect,DiffLvl(diff),[]);
-    IES=MeanRTCorrect./MeanScore;
+    MeanRT=reshape(MM.nanmean_reaction_time,DiffLvl(diff),[]);
+    IES=MeanRT./MeanScore;
         
     writetable(array2table(MeanScore,'VariableNames',GroupNames),['1_mean_allSubs_TPR_diff_' num2str(DiffLvl(diff)) '.csv'])
     writetable(array2table(MeanRTCorrect,'VariableNames',GroupNames),['1_mean_allSubs_RT_diff_' num2str(DiffLvl(diff)) '.csv'])
@@ -29,7 +30,7 @@ end
 
 %% calculate performance for each subject in each diff level in each position - Quad
 cd('/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/DMSQuadrants')
-save_folder='/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse/Sheets';
+save_folder='/Users/Tara/Documents/MATLAB/MATLAB-Programs/PhD-Thesis-Programs/DMS-Project/Results/Analyse';
 load AllDataQuadrants.mat  % 2_ filename
 
 nSubj=numel(AllData);
@@ -52,9 +53,10 @@ for diff = 1:length(DiffLvl)
         MM = grpstats(Data, {'foreperiod','predictability','question'}, {@nanmean,'std'}); %all conditions separated
         MeanScore(:,i,:)=reshape(MM.nanmean_score,DiffLvl(diff),[]);
         MeanRTCorrect(:,i,:)=reshape(MM.nanmean_RTCorrect,DiffLvl(diff),[]);
-        IES(:,i,:)=MeanRTCorrect(:,i,:)./MeanScore(:,i,:);
+        MeanRT(:,i,:)=reshape(MM.nanmean_reaction_time,DiffLvl(diff),[]);
+        IES(:,i,:)=MeanRT(:,i,:)./MeanScore(:,i,:);
     end
-    
+  
     writetable(array2table(MeanScore(:,:,1),'VariableNames',cols),['2_TPR_short_pred_diff_' num2str(DiffLvl(diff)) '.csv'])
     writetable(array2table(MeanScore(:,:,2),'VariableNames',cols),['2_TPR_short_unpred_diff_' num2str(DiffLvl(diff)) '.csv'])
     writetable(array2table(MeanScore(:,:,3),'VariableNames',cols),['2_TPR_long_pred_diff_' num2str(DiffLvl(diff)) '.csv'])
@@ -68,9 +70,9 @@ for diff = 1:length(DiffLvl)
     writetable(array2table(IES(:,:,3),'VariableNames',cols),['2_IES_long_pred_diff_' num2str(DiffLvl(diff)) '.csv'])
     writetable(array2table(IES(:,:,4),'VariableNames',cols),['2_IES_long_unpred_diff_' num2str(DiffLvl(diff)) '.csv'])
     
-    MeanScoreMean = squeeze(mean(MeanScore,2));
-    MeanRTCorrectMean = squeeze(mean(MeanRTCorrect,2));
-    IESMean = squeeze(mean(IES,2));
+    MeanScoreMean = squeeze(nanmean(MeanScore,2));
+    MeanRTCorrectMean = squeeze(nanmean(MeanRTCorrect,2));
+    IESMean = squeeze(nanmean(IES,2));
     
     writetable(array2table(MeanScoreMean,'VariableNames',GroupNames),['2_mean_allSubs_TPR_diff_' num2str(DiffLvl(diff)) '.csv'])
     writetable(array2table(MeanRTCorrectMean,'VariableNames',GroupNames),['2_mean_allSubs_RT_diff_' num2str(DiffLvl(diff)) '.csv'])
