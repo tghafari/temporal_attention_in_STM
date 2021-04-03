@@ -1,0 +1,30 @@
+rm-ANOVA for second part (predictable vs. unpredictable in both experiments) ✔️
+
+Significancy analyses for predictability pooled AND predictable vs. unpredictable + short vs. long
+  difference between positions (regression)
+  difference between quads -> round to the 3rd float position
+  difference between hemifields -> round to the 3rd float position
+  
+Performance group (median-split) significancy analyses for both experiments for predictable vs. unpredictable -> double check performance groups (median split on score median on diff =8 ✔️)
+  Difficulty levels (4,6,8,10 AND 4,8)
+  Positions (positions, quads, hemifields)
+  
+TPR for short-long and predictable-unpredictable conditions on radar charts ✔️
+
+Radar charts for RT_correct and IES ✔️
+
+Fit data on an appropriate function for predicatbily @Samira
+
+General radar chart for RT_correct 
+
+Significancies for IES
+
+Correct wrong sheets ✔️
+
+Put Ali's plots on Github
+
+Supp: confidence levels -> think about it later
+
+#normalization -> think about it later
+
+Last priority: inter-individual difference to help argue for our (robust) significant findings (significancy check)  -> exp. 1 & score in exp.2s
