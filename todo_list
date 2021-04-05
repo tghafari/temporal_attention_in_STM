@@ -1,30 +1,24 @@
-rm-ANOVA for second part (predictable vs. unpredictable in both experiments) ✔️
+Significancy analyses for predictability pooled AND predictable vs. unpredictable + short vs. long (SCORE/IES/RT_correct/confidence)
 
-Significancy analyses for predictability pooled AND predictable vs. unpredictable + short vs. long
-  difference between positions (regression)
-  difference between quads -> round to the 3rd float position
-  difference between hemifields -> round to the 3rd float position
-  
-Performance group (median-split) significancy analyses for both experiments for predictable vs. unpredictable -> double check performance groups (median split on score median on diff =8 ✔️)
+  Performance group (median-split) significancy analyses for both experiments for predictable vs. unpredictable 
   Difficulty levels (4,6,8,10 AND 4,8)
-  Positions (positions, quads, hemifields)
-  
-TPR for short-long and predictable-unpredictable conditions on radar charts ✔️
-
-Radar charts for RT_correct and IES ✔️
-
-Fit data on an appropriate function for predicatbily @Samira
+  Positions (positions, quads, hemifields) -> round to the 3 significant digits (x and y two categories for ANOVA)
+  inter-individual difference to help argue for our (robust) significant findings (significancy check)  -> exp. 1 & score in exp.2s (ANOVA)
 
 General radar chart for RT_correct 
 
-Significancies for IES
+Find an index that combines confidence level and score
 
-Correct wrong sheets ✔️
+Report of what we did
 
-Put Ali's plots on Github
+Organize GitHub with Ali's plots
 
-Supp: confidence levels -> think about it later
+Fit data on an appropriate function for predictably @Samira
+
+difference between positions (regression) @Samira
 
 #normalization -> think about it later
 
-Last priority: inter-individual difference to help argue for our (robust) significant findings (significancy check)  -> exp. 1 & score in exp.2s
+TPR for short-long and predictable-unpredictable conditions on radar charts ✔️
+Radar charts for RT_correct and IES ✔️
+Correct wrong sheets ✔️
